@@ -1,0 +1,60 @@
+<!-- Save as index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Predictor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pizza vs Shawarma vs Sushi</h1>
+    <form id="predict-form">
+      <label>Complexity (1–5): <select id="complexity">
+        <option value="1">1 – Simple</option>
+        <option value="2">2</option>
+        <option value="3" selected>3</option>
+        <option value="4">4</option>
+        <option value="5">5 – Complex</option>
+      </select></label>
+
+      <label>Ingredient text (e.g. “3–5”): <input type="text" id="ingredients-text" value="3"></label>
+
+      <fieldset><legend>Meal settings:</legend>
+        <label><input type="checkbox" name="meal" value="Week day lunch"> Week day lunch</label>
+        <label><input type="checkbox" name="meal" value="Week day dinner"> Week day dinner</label>
+        <label><input type="checkbox" name="meal" value="Weekend lunch"> Weekend lunch</label>
+        <label><input type="checkbox" name="meal" value="Weekend dinner"> Weekend dinner</label>
+        <label><input type="checkbox" name="meal" value="At a party"> At a party</label>
+        <label><input type="checkbox" name="meal" value="Late night snack"> Late night snack</label>
+      </fieldset>
+
+      <label>Expected price: <input type="text" id="price" value="5"></label>
+
+      <fieldset><legend>Relationship:</legend>
+        <label><input type="checkbox" name="rel" value="Parents"> Parents</label>
+        <label><input type="checkbox" name="rel" value="Siblings"> Siblings</label>
+        <label><input type="checkbox" name="rel" value="Friends"> Friends</label>
+        <label><input type="checkbox" name="rel" value="Strangers"> Strangers</label>
+        <label><input type="checkbox" name="rel" value="Teachers"> Teachers</label>
+      </fieldset>
+
+      <label>Spiciness: <select id="spice">
+        <option>None</option>
+        <option>A little (mild)</option>
+        <option>A moderate amount (medium)</option>
+        <option>A lot (hot)</option>
+        <option selected>I will have some of this food item with my hot sauce</option>
+      </select></label>
+
+      <label>Movie: <input type="text" id="movie" placeholder="e.g. Avengers"></label>
+      <label>Drink: <input type="text" id="drink" placeholder="e.g. Coke"></label>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
