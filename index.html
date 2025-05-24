@@ -1,4 +1,4 @@
-<!-- Save as index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,19 +8,24 @@
 </head>
 <body>
   <div class="container">
-    <h1>Pizza vs Shawarma vs Sushi</h1>
+    <h1>Predict the Food Type</h1>
     <form id="predict-form">
-      <label>Complexity (1–5): <select id="complexity">
-        <option value="1">1 – Simple</option>
-        <option value="2">2</option>
-        <option value="3" selected>3</option>
-        <option value="4">4</option>
-        <option value="5">5 – Complex</option>
-      </select></label>
+      <label>Q1: From a scale 1 to 5, how complex is it to make this food? (Where 1 is the most simple, and 5 is the most complex)
+        <select id="complexity">
+          <option value="1">1 – Simple</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5 – Complex</option>
+        </select>
+      </label>
 
-      <label>Ingredient text (e.g. “3–5”): <input type="text" id="ingredients-text" value="3"></label>
+      <label>Q2: How many ingredients would you expect this food item to contain?
+        <input type="text" id="ingredients-text">
+      </label>
 
-      <fieldset><legend>Meal settings:</legend>
+      <fieldset>
+        <legend>Q3: In what setting would you expect this food to be served? Please check all that apply</legend>
         <label><input type="checkbox" name="meal" value="Week day lunch"> Week day lunch</label>
         <label><input type="checkbox" name="meal" value="Week day dinner"> Week day dinner</label>
         <label><input type="checkbox" name="meal" value="Weekend lunch"> Weekend lunch</label>
@@ -29,9 +34,20 @@
         <label><input type="checkbox" name="meal" value="Late night snack"> Late night snack</label>
       </fieldset>
 
-      <label>Expected price: <input type="text" id="price" value="5"></label>
+      <label>Q4: How much would you expect to pay for one serving of this food item?
+        <input type="text" id="price">
+      </label>
 
-      <fieldset><legend>Relationship:</legend>
+      <label>Q5: What movie do you think of when thinking of this food item?
+        <input type="text" id="movie">
+      </label>
+
+      <label>Q6: What drink would you pair with this food item?
+        <input type="text" id="drink">
+      </label>
+
+      <fieldset>
+        <legend>Q7: When you think about this food item, who does it remind you of?</legend>
         <label><input type="checkbox" name="rel" value="Parents"> Parents</label>
         <label><input type="checkbox" name="rel" value="Siblings"> Siblings</label>
         <label><input type="checkbox" name="rel" value="Friends"> Friends</label>
@@ -39,16 +55,15 @@
         <label><input type="checkbox" name="rel" value="Teachers"> Teachers</label>
       </fieldset>
 
-      <label>Spiciness: <select id="spice">
-        <option>None</option>
-        <option>A little (mild)</option>
-        <option>A moderate amount (medium)</option>
-        <option>A lot (hot)</option>
-        <option selected>I will have some of this food item with my hot sauce</option>
-      </select></label>
-
-      <label>Movie: <input type="text" id="movie" placeholder="e.g. Avengers"></label>
-      <label>Drink: <input type="text" id="drink" placeholder="e.g. Coke"></label>
+      <label>Q8: How much hot sauce would you add to this food item?
+        <select id="spice">
+          <option>None</option>
+          <option>A little (mild)</option>
+          <option>A moderate amount (medium)</option>
+          <option>A lot (hot)</option>
+          <option>I will have some of this food item with my hot sauce</option>
+        </select>
+      </label>
 
       <button type="submit">Predict</button>
     </form>
