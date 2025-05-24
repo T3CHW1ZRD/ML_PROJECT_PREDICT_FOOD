@@ -1,36 +1,33 @@
----
-layout: default
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Predictor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Predict the Food Type</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Food Predictor</h1>
+    <div class="banner-box">
+      <h2>ML_PROJECT_PREDICT_FOOD</h2>
+      <a href="https://github.com/T3CHW1ZRD/ML_PROJECT_PREDICT_FOOD" class="btn-primary" target="_blank">View on GitHub</a>
+    </div>
+
+    <h1>Predict the Food Type</h1>
     <form id="predict-form">
-      <label>Q1: From a scale 1 to 5, how complex is it to make this food? (Where 1 is the most simple, and 5 is the most complex)
+      <label>Q1: From a scale 1 to 5, how complex is it to make this food?
         <select id="complexity">
           <option value="1">1 – Simple</option>
           <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="3" selected>3</option>
           <option value="4">4</option>
           <option value="5">5 – Complex</option>
         </select>
       </label>
-
       <label>Q2: How many ingredients would you expect this food item to contain?
         <input type="text" id="ingredients-text">
       </label>
-
       <fieldset>
-        <legend>Q3: In what setting would you expect this food to be served? Please check all that apply</legend>
+        <legend>Q3: In what setting would you expect this food to be served?</legend>
         <label><input type="checkbox" name="meal" value="Week day lunch"> Week day lunch</label>
         <label><input type="checkbox" name="meal" value="Week day dinner"> Week day dinner</label>
         <label><input type="checkbox" name="meal" value="Weekend lunch"> Weekend lunch</label>
@@ -38,19 +35,15 @@ layout: default
         <label><input type="checkbox" name="meal" value="At a party"> At a party</label>
         <label><input type="checkbox" name="meal" value="Late night snack"> Late night snack</label>
       </fieldset>
-
       <label>Q4: How much would you expect to pay for one serving of this food item?
         <input type="text" id="price">
       </label>
-
       <label>Q5: What movie do you think of when thinking of this food item?
         <input type="text" id="movie">
       </label>
-
       <label>Q6: What drink would you pair with this food item?
         <input type="text" id="drink">
       </label>
-
       <fieldset>
         <legend>Q7: When you think about this food item, who does it remind you of?</legend>
         <label><input type="checkbox" name="rel" value="Parents"> Parents</label>
@@ -59,23 +52,22 @@ layout: default
         <label><input type="checkbox" name="rel" value="Strangers"> Strangers</label>
         <label><input type="checkbox" name="rel" value="Teachers"> Teachers</label>
       </fieldset>
-
       <label>Q8: How much hot sauce would you add to this food item?
         <select id="spice">
           <option>None</option>
           <option>A little (mild)</option>
           <option>A moderate amount (medium)</option>
           <option>A lot (hot)</option>
-          <option>I will have some of this food item with my hot sauce</option>
+          <option selected>I will have some of this food item with my hot sauce</option>
         </select>
       </label>
-
       <button type="submit" class="btn-primary">Predict</button>
     </form>
 
     <div id="result" class="result-box">
-  <img id="result-image" src="" alt="Result image" style="max-width:100%; margin-top: 1rem; display: none; border-radius: 6px;">
-</div>
+      <p id="result-text"></p>
+      <img id="result-image" style="display: none; max-width: 100%; margin-top: 1rem;" alt="Food prediction image">
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
