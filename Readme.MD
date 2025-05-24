@@ -1,6 +1,6 @@
 ### Overview
 
-This project was an exploration in data processing and developing a model in order to a label using numerical and textual features. A full overview of data processing methods and different models explored is available in the ```DATA_CLEANING.ipynb``` file
+This project was an exploration in data processing and developing a model in order to a label using numerical and textual features. A full overview of data processing methods and different models explored is available in the ```DATA_CLEANING.ipynb``` and ```DataAnalysisReport.pdf``` files
 
 ### Methodology
 
