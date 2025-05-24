@@ -16,3 +16,4 @@ A user survey was conducted, where 500+ students answered three surveys, each ti
 
 -Did it get it right?
 
+![Site Image](mlprojectpredictfoodpicexample.PNG)
