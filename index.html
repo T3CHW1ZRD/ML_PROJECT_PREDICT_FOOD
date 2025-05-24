@@ -7,75 +7,73 @@ layout: default
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Predictor Wizard</title>
+  <title>Food Predictor</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wizard-container">
-    <div class="card">
-      <form id="wizard-form">
-        <!-- Step indicators -->
-        <div class="steps-indicator">
-          <div class="step active"></div>
-          <div class="step"></div>
-          <div class="step"></div>
-          <div class="step"></div>
-          <div class="step"></div>
-        </div>
+  <div class="container">
+    <h1>Food Predictor</h1>
+    <form id="predict-form">
+      <label>Q1: From a scale 1 to 5, how complex is it to make this food? (Where 1 is the most simple, and 5 is the most complex)
+        <select id="complexity">
+          <option value="1">1 – Simple</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5 – Complex</option>
+        </select>
+      </label>
 
-        <!-- Step 0: Choose Food -->
-        <div class="step-content active" data-step="0">
-          <h2>Which food are you thinking of?</h2>
-          <div class="options">
-            <button type="button" class="option-btn" data-value="Pizza">Pizza</button>
-            <button type="button" class="option-btn" data-value="Shawarma">Shawarma</button>
-            <button type="button" class="option-btn" data-value="Sushi">Sushi</button>
-          </div>
-        </div>
+      <label>Q2: How many ingredients would you expect this food item to contain?
+        <input type="text" id="ingredients-text">
+      </label>
 
-        <!-- Step 1: Q1 -->
-        <div class="step-content" data-step="1">
-          <h2>Q1: From a scale 1 to 5, how complex is it to make this food? (1 simplest, 5 most complex)</h2>
-          <select id="complexity" class="input-field">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
+      <fieldset>
+        <legend>Q3: In what setting would you expect this food to be served? Please check all that apply</legend>
+        <label><input type="checkbox" name="meal" value="Week day lunch"> Week day lunch</label>
+        <label><input type="checkbox" name="meal" value="Week day dinner"> Week day dinner</label>
+        <label><input type="checkbox" name="meal" value="Weekend lunch"> Weekend lunch</label>
+        <label><input type="checkbox" name="meal" value="Weekend dinner"> Weekend dinner</label>
+        <label><input type="checkbox" name="meal" value="At a party"> At a party</label>
+        <label><input type="checkbox" name="meal" value="Late night snack"> Late night snack</label>
+      </fieldset>
 
-        <!-- Step 2: Q2 -->
-        <div class="step-content" data-step="2">
-          <h2>Q2: How many ingredients would you expect this food item to contain?</h2>
-          <input type="number" id="ingredients-text" class="input-field" min="1">
-        </div>
+      <label>Q4: How much would you expect to pay for one serving of this food item?
+        <input type="text" id="price">
+      </label>
 
-        <!-- Step 3: Q8 -->
-        <div class="step-content" data-step="3">
-          <h2>Q8: How much hot sauce would you add to this food item?</h2>
-          <select id="spice" class="input-field">
-            <option>None</option>
-            <option>A little (mild)</option>
-            <option>A moderate amount (medium)</option>
-            <option>A lot (hot)</option>
-            <option>I will have some of this food item with my hot sauce</option>
-          </select>
-        </div>
+      <label>Q5: What movie do you think of when thinking of this food item?
+        <input type="text" id="movie">
+      </label>
 
-        <!-- Step 4: Result -->
-        <div class="step-content" data-step="4">
-          <h2 id="result-text">Prediction:</h2>
-        </div>
+      <label>Q6: What drink would you pair with this food item?
+        <input type="text" id="drink">
+      </label>
 
-        <!-- Navigation Buttons -->
-        <div class="nav-buttons">
-          <button type="button" id="prev-btn" class="nav-btn" disabled>Previous</button>
-          <button type="button" id="next-btn" class="nav-btn">Next</button>
-        </div>
-      </form>
-    </div>
+      <fieldset>
+        <legend>Q7: When you think about this food item, who does it remind you of?</legend>
+        <label><input type="checkbox" name="rel" value="Parents"> Parents</label>
+        <label><input type="checkbox" name="rel" value="Siblings"> Siblings</label>
+        <label><input type="checkbox" name="rel" value="Friends"> Friends</label>
+        <label><input type="checkbox" name="rel" value="Strangers"> Strangers</label>
+        <label><input type="checkbox" name="rel" value="Teachers"> Teachers</label>
+      </fieldset>
+
+      <label>Q8: How much hot sauce would you add to this food item?
+        <select id="spice">
+          <option>None</option>
+          <option>A little (mild)</option>
+          <option>A moderate amount (medium)</option>
+          <option>A lot (hot)</option>
+          <option>I will have some of this food item with my hot sauce</option>
+        </select>
+      </label>
+
+      <button type="submit" class="btn-primary">Predict</button>
+    </form>
+
+    <div id="result" class="result-box"></div>
   </div>
   <script src="script.js"></script>
 </body>

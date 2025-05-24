@@ -1,13 +1,14 @@
-// Load model weights & vocab
 let W, vocab;
-(async function(){
-  [W, vocab] = await Promise.all([
+(async()=>{
+  [W,vocab] = await Promise.all([
     fetch('weights.json').then(r=>r.json()),
     fetch('vocab.json').then(r=>r.json())
   ]);
 })();
 
-// Mapping & utilities
+const STOPWORDS = {/* ... same list as before ... */};
+const mealSettings = ['Week day lunch','Week day dinner','Weekend lunch','Weekend dinner','At a party','Late night snack'];
+const relationships = ['Parents','Siblings','Friends','Strangers','Teachers'];
 const spiceMap = {
   'None':0,
   'A little (mild)':1,
@@ -17,73 +18,57 @@ const spiceMap = {
 };
 const labels = ['Pizza','Shawarma','Sushi'];
 
-function softmax(arr) {
-  const m = Math.max(...arr);
-  const ex = arr.map(x=>Math.exp(x-m));
+function cleanText(text) {
+  return text.toLowerCase()
+    .replace(/[^\w\s]/g,'')
+    .split(/\s+/)
+    .filter(w=> !/^\d+$/.test(w) && !(w in STOPWORDS))
+    .join(' ');
+}
+
+function countIngredients(text) {
+  const nums = [...text.matchAll(/\d+/g)].map(m=>+m[0]);
+  if(nums.length) return Math.max(...nums);
+  return text.split(',').length;
+}
+
+function extractPrice(text) {
+  const nums = [...text.matchAll(/\d*\.?\d+/g)].map(m=>+m[0]);
+  return nums.length? Math.min(...nums): 3.0;
+}
+
+function vectorize() {
+  const complexity = +document.getElementById('complexity').value;
+  const ingrCount = countIngredients(document.getElementById('ingredients-text').value);
+  const meal = mealSettings.map(s=> document.querySelector(`input[name=meal][value="${s}"]`).checked ? 1 : 0);
+  const price = extractPrice(document.getElementById('price').value);
+  const rel = relationships.map(r=> document.querySelector(`input[name=rel][value="${r}"]`).checked ? 1 : 0);
+  const spice = spiceMap[document.getElementById('spice').value]||0;
+
+  const text = ['ingredients-text','movie','drink']
+    .map(id=> cleanText(document.getElementById(id).value))
+    .join(' ');
+
+  const bow = new Array(Object.keys(vocab).length).fill(0);
+  text.split(' ').forEach(w=> { if(w in vocab) bow[vocab[w]]++; });
+
+  const nums = [complexity, ingrCount, ...meal, price, ...rel, spice];
+  return [1, ...nums, ...bow];
+}
+
+function softmax(logits) {
+  const m = Math.max(...logits);
+  const ex = logits.map(x=>Math.exp(x-m));
   const sum = ex.reduce((a,b)=>a+b,0);
   return ex.map(x=>x/sum);
 }
 
-// Simplified vector builder for this wizard
-function buildVector(answers) {
-  // answers: {food, complexity, ingredients, spice}
-  // Dummy full-vector: [1, complexity, ingredients, ... zeros ..., spice]
-  const vec = [1, +answers.complexity, +answers.ingredients];
-  // pad zeros to match vocab length + other fields
-  const padLen = W.length - vec.length - 1;
-  return vec.concat(Array(padLen).fill(0), spiceMap[answers.spice] || 0);
-}
-
-// Wizard logic
-const steps = Array.from(document.querySelectorAll('.step-content'));
-const indicators = Array.from(document.querySelectorAll('.step'));
-const prevBtn = document.getElementById('prev-btn');
-const nextBtn = document.getElementById('next-btn');
-let currentStep = 0;
-const answers = {};
-
-function showStep(i) {
-  steps.forEach((s, idx)=> s.classList.toggle('active', idx===i));
-  indicators.forEach((ind, idx)=> ind.classList.toggle('active', idx<=i));
-  prevBtn.disabled = i===0;
-  nextBtn.textContent = i===steps.length-1 ? 'Restart' : 'Next';
-}
-
-// Food selection
-document.querySelectorAll('.option-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
-    btn.classList.add('selected');
-    answers.food = btn.dataset.value;
+document.getElementById('predict-form')
+  .addEventListener('submit', e=>{
+    e.preventDefault();
+    const vec = vectorize();
+    const logits = labels.map((_,i)=> vec.reduce((s,v,j)=> s + v*W[j][i], 0));
+    const probs = softmax(logits);
+    const idx = probs.indexOf(Math.max(...probs));
+    document.getElementById('result').textContent = `Prediction: ${labels[idx]} (${(probs[idx]*100).toFixed(1)}%)`;
   });
-});
-
-prevBtn.addEventListener('click', ()=>{
-  if(currentStep>0) currentStep--;
-  showStep(currentStep);
-});
-
-nextBtn.addEventListener('click', ()=>{
-  if(currentStep < steps.length-1) {
-    // gather answers on each step
-    if(currentStep===1) answers.complexity = document.getElementById('complexity').value;
-    if(currentStep===2) answers.ingredients = document.getElementById('ingredients-text').value;
-    if(currentStep===3) answers.spice = document.getElementById('spice').value;
-    currentStep++;
-    if(currentStep===steps.length-1) {
-      // final prediction
-      const vec = buildVector(answers);
-      const logits = labels.map((_,i)=> vec.reduce((s,v,j)=> s + v * W[j][i], 0));
-      const probs = softmax(logits);
-      const idx = probs.indexOf(Math.max(...probs));
-      document.getElementById('result-text').textContent = `Prediction: ${labels[idx]} (${(probs[idx]*100).toFixed(1)}%)`;
-    }
-  } else {
-    // restart
-    location.reload();
-  }
-  showStep(currentStep);
-});
-
-// Initialize
-showStep(0);
