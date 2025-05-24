@@ -1,13 +1,18 @@
 /* Modern single-page form styling */
+body > header,
+body > footer,
+#banner {
+  display: none !important;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: #f5f7fa;
   margin: 0;
   display: flex;
   justify-content: center;
-  padding: 2rem; /* new */
+  padding: 2rem;
 }
-
 
 .container {
   background: #fff;
@@ -16,6 +21,7 @@ body {
   padding: 2rem;
   width: 100%;
   max-width: 600px;
+  margin: 0 auto;
 }
 
 h1 {
