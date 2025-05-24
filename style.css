@@ -96,14 +96,17 @@ fieldset input[type="checkbox"] {
 .banner-box {
   background: #fff;
   padding: 1rem;
-  border-radius: 6px;
+  border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   margin-bottom: 1.5rem;
   text-align: center;
 }
 
 .banner-box h2 {
-  margin: 0;
-  color: #007acc;
-  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.banner-box .btn-primary {
+  margin-top: 0.5rem;
+  display: inline-block;
 }
