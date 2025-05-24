@@ -9,7 +9,10 @@ A user survey was conducted, where 500+ students answered three surveys, each ti
 ### SETUP INSTRUCTIONS:
 
 -Navigate to https://t3chw1zrd.github.io/ML_PROJECT_PREDICT_FOOD/
+
 -Think of a food (Shawarma, Sushi, Pizza)
+
 -Answer the questions
+
 -Did it get it right?
 
