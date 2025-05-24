@@ -4,7 +4,7 @@ This project was an exploration in data processing and developing a model in ord
 
 ### Methodology
 
-A user survey was conducted, where 500+ students answered three surveys, each time thinking of a different food item. The questions remained the same. Data was analyzed for correlation, and processed using various techinques (Simple string processing such as obtaining a single number from a range). BOW approach by using naiive bayes is applied to textual features to vectorie them, using a vocab dictionary. Finally, Logistic regression is applied with a softmax activation function in order to get a final output vector, where the largest value is returned as the highest probability guess
+A user survey was conducted, where 500+ students answered three surveys, each time thinking of a different food item. The questions remained the same. Data was analyzed for correlation, and processed using various techinques (Simple string processing such as obtaining a single number from a range). BOW approach by using naiive bayes is applied to textual features to vectorize them, using a vocab dictionary. Finally, Logistic regression is applied with a softmax activation function in order to get a final output vector, where the largest value is returned as the highest probability guess
 
 ### SETUP INSTRUCTIONS:
 
