@@ -71,4 +71,7 @@ document.getElementById('predict-form')
     const probs = softmax(logits);
     const idx = probs.indexOf(Math.max(...probs));
     document.getElementById('result').textContent = `Prediction: ${labels[idx]} (${(probs[idx]*100).toFixed(1)}%)`;
+const img = document.getElementById('result-image');
+img.src = `${labels[idx].toLowerCase()}.jpg`;
+img.style.display = 'block';
   });

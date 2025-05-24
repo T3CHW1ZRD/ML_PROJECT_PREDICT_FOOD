@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +73,9 @@ layout: default
       <button type="submit" class="btn-primary">Predict</button>
     </form>
 
-    <div id="result" class="result-box"></div>
+    <div id="result" class="result-box">
+  <img id="result-image" src="" alt="Result image" style="max-width:100%; margin-top: 1rem; display: none; border-radius: 6px;">
+</div>
   </div>
   <script src="script.js"></script>
 </body>
